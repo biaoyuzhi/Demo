@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Component
 public class HapExcelExportService {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(HapExcelExportService.class);
 
     /**
      * 入参样例：
@@ -71,7 +71,7 @@ public class HapExcelExportService {
             //使用easyPoi的easypoiMapExcelView实现导出
             ExportParams params = new ExportParams();
             if (isHSSF) {
-                params.setType(ExcelType.HSSF);             //.xls
+                params.setType(ExcelType.HSSF);                 //.xls
             } else {
                 params.setType(ExcelType.XSSF);                 //.xlsx
             }

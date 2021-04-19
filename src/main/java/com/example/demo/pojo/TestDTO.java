@@ -2,13 +2,12 @@ package com.example.demo.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class TestDTO {
     private Integer lineNumber;
     private String description;
-
-    public TestDTO(Integer lineNumber, String description) {
-        this.lineNumber = lineNumber;
-        this.description = description;
-    }
+    private Date reportDateFrom;
+    private Date reportDateTo;
 }

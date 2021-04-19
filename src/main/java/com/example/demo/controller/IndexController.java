@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.excel.annotation.ExcelExport;
 import com.example.demo.excel.util.ResponseData;
 import com.example.demo.pojo.TestDTO;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,18 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class IndexController {
+public class IndexController extends BaseController {
 
-    @GetMapping()
-    @ExcelExport()
-    public ResponseData index(HttpServletRequest request, HttpServletResponse response) {
-        List<TestDTO> list = new ArrayList() {    // 匿名内部类方式，注意下面的都是";"
-            {
-                add(new TestDTO(0, "a"));
-                add(new TestDTO(10, "b"));
-                add(new TestDTO(20, "c"));
-            }
-        };
+    @RequestMapping(value = "/export", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseData index(TestDTO dto, HttpServletRequest request, HttpServletResponse response) {
+        System.err.println(dto);
+        List<TestDTO> list = new ArrayList();
         return new ResponseData(list);
     }
 

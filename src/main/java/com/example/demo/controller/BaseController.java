@@ -13,8 +13,13 @@ import java.util.Date;
  */
 @RestController
 public class BaseController {
+
+    /**
+     * 处理前端入参中String对应后端Date类型数据
+     */
     @InitBinder
     public void initBinder(WebDataBinder dataBinder, HttpServletRequest request) {
         dataBinder.registerCustomEditor(Date.class, new CustomDateEditor());
     }
+
 }

@@ -1,12 +1,17 @@
 package com.example.demo.controller;
 
-import org.apache.tomcat.util.threads.TaskThreadFactory;
+import com.alibaba.fastjson.JSON;
+import com.example.demo.pojo.TestDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,20 +22,13 @@ class IndexControllerTest {
 
     @Test
     public void testAll() throws ParseException {
-        Runnable myRunnable = () -> {
-            try {
-                System.out.println(Thread.currentThread().getName() + "run");
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        };
+        BigDecimal PaymentAmount = new BigDecimal("110");
+        BigDecimal Amount = new BigDecimal("60.00");
+        BigDecimal NeedPaymentAmount = new BigDecimal("110");
 
-        ThreadPoolExecutor pool = new ThreadPoolExecutor(3, 5, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1),
-                new TaskThreadFactory("aa-", true, 3), (r, executor) -> System.out.println("拒接策略"));
-
-        for (int i = 0; i < 10; i++) {
-            pool.execute(myRunnable);
-        }
+        BigDecimal singleAmount = PaymentAmount
+                .multiply(Amount).divide(NeedPaymentAmount, 6);
+        System.err.println(singleAmount);
     }
 
 }

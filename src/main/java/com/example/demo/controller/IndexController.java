@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.excel.annotation.ExcelExport;
 import com.example.demo.excel.util.ResponseData;
 import com.example.demo.pojo.TestDTO;
 import com.example.demo.service.AllService;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,12 @@ public class IndexController extends BaseController {
     private AllService service;
 
     @RequestMapping(value = "/export", method = {RequestMethod.GET, RequestMethod.POST})
+    @ExcelExport
     public ResponseData index(TestDTO dto, HttpServletRequest request, HttpServletResponse response) {
+        dto.setDescription("xxx");
+        dto.setLineNumber(13);
         System.err.println(dto);
-        List<TestDTO> list = new ArrayList();
+        List<TestDTO> list = Collections.singletonList(dto);
         return new ResponseData(list);
     }
 
